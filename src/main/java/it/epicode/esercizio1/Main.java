@@ -1,8 +1,12 @@
 package it.epicode.esercizio1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Scanner;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static int[] creaArrayCasuale() {
         int[] array = new int[5];
@@ -39,13 +43,19 @@ public class Main {
                 richiedi = false;
                 break;
             }
-            System.out.println("-- Inserisci il numero");
+            System.out.println("-- Inserisci il numero compreo tra 1 e 10");
             int numero = scanner.nextInt();
+
+            if(numero > 10 ){
+                logger.error("Il numero non può essere maggiore di 10");
+                scanner.nextLine();
+                continue;
+            }
             array[posizione-1] = numero;
             stampaArray(array);
 
         } catch (Exception e) {
-            System.out.println("Non hai inserito valore corretto");
+            logger.error("Errore: il numero inserito non è corretto");
             scanner.nextLine();
         }
 
